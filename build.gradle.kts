@@ -23,8 +23,10 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("org.springframework.boot:spring-boot-starter-web:3.2.0")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	// https://mavenlibs.com/maven/dependency/jakarta.validation/jakarta.validation-api
 	implementation("jakarta.validation:jakarta.validation-api:3.0.2")
+	implementation("org.springdoc:springdoc-openapi-ui:1.7.0")
+	implementation("org.springdoc:springdoc-openapi-kotlin:1.7.0")
+	implementation("org.springframework.boot:spring-boot-actuator:3.1.3")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
@@ -38,3 +40,4 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
+

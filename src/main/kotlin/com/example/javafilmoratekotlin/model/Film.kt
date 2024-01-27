@@ -3,7 +3,6 @@ package com.example.javafilmoratekotlin.model
 import jakarta.validation.constraints.*
 import java.time.LocalDate
 
-
 class Film(
     private var id: Int,
     @NotBlank
