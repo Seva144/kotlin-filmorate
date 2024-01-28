@@ -1,24 +1,30 @@
 package com.example.javafilmoratekotlin.controllers
 
 import com.example.javafilmoratekotlin.model.User
-import jakarta.validation.Valid
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.Parameter
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 @RestController
-@RequestMapping( "/users")
+@RequestMapping("/users")
+@Tag(name = "Контроллер полтьзователей", description = "API для CRUD пользователей")
 class UserController {
 
-    private final val users = HashMap<Int, User> (4)
+    private final val users = HashMap<Int, User>(4)
 
     protected val id: Int = 0
 
     @GetMapping
+    @Operation(summary = "Показать всех пользователей")
     fun returnAllUsers(): ArrayList<User> {
         return ArrayList(users.values)
     }
 
     @PostMapping
-    fun createUser (@Valid @RequestBody user: User): User {
+    @Operation(summary = "Добавить пользователя")
+    fun createUser(@Parameter(required = true) @Valid @RequestBody user: User): User {
         validateUser(user)
         user.setId(generateId())
         users.put(user.getId(), user)
@@ -26,17 +32,17 @@ class UserController {
     }
 
     @PutMapping
-    fun changeUser (@Valid @RequestBody user: User): User {
-        validateUser(user)
-        if(users.containsKey(user.getId()))
+    @Operation(summary = "Обноваить пользователя")
+    fun changeUser(@Parameter(required = true) @Valid @RequestBody user: User): User {
+        if (users.containsKey(user.getId()))
             users.replace(user.getId(), user)
         else
-            throw Exception ("Неверный ID")
+            throw Exception("Неверный ID")
         return user;
     }
 
-    fun validateUser (user: User){
-        if (user.getName() == null){
+    fun validateUser(user: User) {
+        if (user.getName() == null) {
             user.setName(user.getLogin())
         }
     }
@@ -44,5 +50,4 @@ class UserController {
     fun generateId(): Int {
         return id.inc()
     }
-
 }

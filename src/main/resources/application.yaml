@@ -1,0 +1,6 @@
+springdoc:
+  show-actuator: false
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    operations-sorter: method

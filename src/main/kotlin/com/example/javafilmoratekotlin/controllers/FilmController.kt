@@ -1,13 +1,16 @@
 package com.example.javafilmoratekotlin.controllers
 
 import com.example.javafilmoratekotlin.model.Film
-import jakarta.validation.Valid
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.Parameter
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.*
 import java.time.LocalDate
-
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("/films")
+@Tag(name = "Контроллер фильмов", description = "API для CRUD фильмов")
 class FilmController {
 
     private val films = HashMap<Int, Film>(4)
@@ -15,12 +18,14 @@ class FilmController {
     protected val id: Int = 0
 
     @GetMapping
+    @Operation(summary = "Показать все фильмы")
     fun returnAllFilms(): ArrayList<Film> {
         return ArrayList(films.values)
     }
 
     @PostMapping
-    fun createFilm(@Valid @RequestBody film: Film): Film {
+    @Operation(summary = "Добавить фильм")
+    fun createFilm(@Parameter(required = true) @Valid  @RequestBody film: Film): Film {
         validateFilm(film)
         film.setId(generateId())
         films[film.getId()] = film
@@ -28,7 +33,8 @@ class FilmController {
     }
 
     @PutMapping
-    fun changeFilm(@Valid @RequestBody film: Film): Film {
+    @Operation(summary = "Изменить фильм")
+    fun changeFilm(@Parameter(required = true) @Valid @RequestBody film: Film): Film {
         validateFilm(film)
         if (films.containsKey(film.getId()))
             films.replace(film.getId(), film)

@@ -1,16 +1,24 @@
 package com.example.javafilmoratekotlin.model
 
-import jakarta.validation.constraints.*
+import io.swagger.v3.oas.annotations.media.Schema
 import java.time.LocalDate
+import javax.validation.constraints.*
 
+@Schema(description = "Информация о фильме")
 class Film(
+
+    @Schema(description = "Идентификатор фильма")
     private var id: Int,
+    @Schema(description = "Наименование фильма")
     @NotBlank
     private var name: String,
+    @Schema(description = "Описание фильма")
     @Size(max = 200)
     private var description: String,
+    @Schema(description = "Дата релиза фильма")
     @Past
     private var releaseDate: LocalDate,
+    @Schema(description = "Продолжительность фильма")
     @Positive
     private var duration: Int
 ) {
