@@ -27,8 +27,8 @@ class FilmController {
     @Operation(summary = "Добавить фильм")
     fun createFilm(@Parameter(required = true) @Valid  @RequestBody film: Film): Film {
         validateFilm(film)
-        film.setId(generateId())
-        films[film.getId()] = film
+        film.id = generateId()
+        films[film.id] = film
         return film
     }
 
@@ -36,8 +36,8 @@ class FilmController {
     @Operation(summary = "Изменить фильм")
     fun changeFilm(@Parameter(required = true) @Valid @RequestBody film: Film): Film {
         validateFilm(film)
-        if (films.containsKey(film.getId()))
-            films.replace(film.getId(), film)
+        if (films.containsKey(film.id))
+            films.replace(film.id, film)
         else
             throw Exception("Неверный ID")
         return film
@@ -45,7 +45,7 @@ class FilmController {
 
     fun validateFilm(film: Film) {
         val trainArrival = LocalDate.of(2018, 12, 31)
-        if (film.getReleaseDate().isBefore(trainArrival))
+        if (film.releaseDate.isBefore(trainArrival))
             throw Exception("Некорретная дата")
     }
 

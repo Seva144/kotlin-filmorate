@@ -26,24 +26,24 @@ class UserController {
     @Operation(summary = "Добавить пользователя")
     fun createUser(@Parameter(required = true) @Valid @RequestBody user: User): User {
         validateUser(user)
-        user.setId(generateId())
-        users.put(user.getId(), user)
+        user.id
+        users.put(user.id, user)
         return user
     }
 
     @PutMapping
     @Operation(summary = "Обноваить пользователя")
     fun changeUser(@Parameter(required = true) @Valid @RequestBody user: User): User {
-        if (users.containsKey(user.getId()))
-            users.replace(user.getId(), user)
+        if (users.containsKey(user.id))
+            users.replace(user.id, user)
         else
             throw Exception("Неверный ID")
         return user;
     }
 
     fun validateUser(user: User) {
-        if (user.getName() == null) {
-            user.setName(user.getLogin())
+        if (user.name == null) {
+            user.name = user.login
         }
     }
 
