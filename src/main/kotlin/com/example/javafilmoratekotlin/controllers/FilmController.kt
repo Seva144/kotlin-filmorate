@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.*
 import java.time.LocalDate
 import javax.validation.Valid
 
+
+/**
+ * @property FilmController - контроллер фильмов
+ */
 @RestController
 @RequestMapping("/films")
 @Tag(name = "Контроллер фильмов", description = "API для CRUD фильмов")
@@ -17,12 +21,17 @@ class FilmController {
 
     protected val id: Int = 0
 
+    /**
+     * Функция получения всех фильмов
+     */
     @GetMapping
     @Operation(summary = "Показать все фильмы")
     fun returnAllFilms(): ArrayList<Film> {
         return ArrayList(films.values)
     }
-
+    /**
+     * Функция создания нового фильма
+     */
     @PostMapping
     @Operation(summary = "Добавить фильм")
     fun createFilm(@Parameter(required = true) @Valid  @RequestBody film: Film): Film {
@@ -32,6 +41,9 @@ class FilmController {
         return film
     }
 
+    /**
+     * Функция изменения фильма
+     */
     @PutMapping
     @Operation(summary = "Изменить фильм")
     fun changeFilm(@Parameter(required = true) @Valid @RequestBody film: Film): Film {
@@ -43,12 +55,18 @@ class FilmController {
         return film
     }
 
+    /**
+     * @suppress
+     */
     fun validateFilm(film: Film) {
         val trainArrival = LocalDate.of(2018, 12, 31)
         if (film.releaseDate.isBefore(trainArrival))
             throw Exception("Некорретная дата")
     }
 
+    /**
+     * @suppress
+     */
     fun generateId(): Int {
         return id.inc()
     }
