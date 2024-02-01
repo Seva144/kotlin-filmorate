@@ -4,6 +4,17 @@ import io.swagger.v3.oas.annotations.media.Schema
 import java.time.LocalDate
 import javax.validation.constraints.*
 
+
+/**
+ *
+ * Дата класс Film
+ * @constructor конструктор класса
+ * @param id идентификатор фильма
+ * @param name наименование фильма
+ * @param description описание фильма
+ * @param releaseDate дата релиза фильма
+ * @param duration продолжительность фильма
+ */
 @Schema(description = "Информация о фильме")
 data class Film(
 
