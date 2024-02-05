@@ -15,6 +15,7 @@ import javax.validation.constraints.*
  * @param releaseDate дата релиза фильма
  * @param duration продолжительность фильма
  */
+
 @Schema(description = "Информация о фильме")
 data class Film(
 

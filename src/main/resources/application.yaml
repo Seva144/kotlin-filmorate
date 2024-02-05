@@ -4,3 +4,10 @@ springdoc:
     enabled: true
     path: /swagger-ui.html
     operations-sorter: method
+spring:
+  thymeleaf:
+    cache: false
+    prefix: resources/templates/index.html
+server:
+  port: 8080
+

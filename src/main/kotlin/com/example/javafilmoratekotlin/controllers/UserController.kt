@@ -17,7 +17,7 @@ class UserController {
 
     private final val users = HashMap<Int, User>(4)
 
-    protected val id: Int = 0
+    private val id: Int = 0
 
     /**
      * Функция получения всех пользователей
@@ -33,7 +33,7 @@ class UserController {
      */
     @PostMapping
     @Operation(summary = "Добавить пользователя")
-    fun createUser(@Parameter(required = true) @Valid @RequestBody user: User): User {
+    fun createUser(@Parameter(required = true) @Valid @RequestBody user: User, number: Int): User {
         validateUser(user)
         user.id
         users.put(user.id, user)
