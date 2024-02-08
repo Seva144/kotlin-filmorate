@@ -19,7 +19,7 @@ class FilmController {
 
     private val films = HashMap<Int, Film>(4)
 
-    protected val id: Int = 0
+    private val id: Int = 0
 
     /**
      * Функция получения всех фильмов
@@ -34,7 +34,7 @@ class FilmController {
      */
     @PostMapping
     @Operation(summary = "Добавить фильм")
-    fun createFilm(@Parameter(required = true) @Valid  @RequestBody film: Film): Film {
+    fun createFilm(@Parameter(required = true) @Valid  @RequestBody film: Film, id: Int): Film {
         validateFilm(film)
         film.id = generateId()
         films[film.id] = film

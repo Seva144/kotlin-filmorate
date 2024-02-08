@@ -29,7 +29,6 @@ fun main() {
     val dataClass = User::class
     val person = Persona("Esmeralda", 23)
 
-
     displayClassName(person)
 
 }
